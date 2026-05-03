@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="20dp">
+
+    <!-- כותרת המשחק -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brick Breaker"
+        android:textSize="48sp"
+        android:textColor="#FFD700"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"/>
+
+    <!-- כפתור Start -->
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:text="START"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF5722"
+        android:layout_below="@id/titleText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"/>
+
+    <Button
+        android:id="@+id/highscoreButton"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:text="HIGHSCORE"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#03A9F4"
+        android:layout_below="@id/startButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+
+    <!-- טקסט לשיא הנוכחי -->
+    <TextView
+        android:id="@+id/highscoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Highscore: 0 "
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/highscoreButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+    <!-- כפתור Exit -->
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:text="EXIT"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#F44336"
+        android:layout_below="@id/highscoreButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+
+</RelativeLayout>
