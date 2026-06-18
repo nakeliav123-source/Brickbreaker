@@ -93,6 +93,59 @@ public class GameView extends SurfaceView implements Runnable {
             if (lives <= 0){
                 isGameOver =true;
                 showgameoverscreen =true;
+                // שליפת ה-Activity הראשי כדי להריץ עליו את חלונית הדיאלוג
+                if (getContext() instanceof android.app.Activity) {
+                    ((android.app.Activity) getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // יצירת מסד הנתונים מקומית מתוך ה-Context
+                            final DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+
+                            // יצירת תיבת טקסט לקלט שם השחקן
+                            final android.widget.EditText input = new android.widget.EditText(getContext());
+                            input.setHint("הכנס שם");
+
+                            // שימוש במשתנה הניקוד שלך (אם קוראים לו score או scoreX, שנה בהתאם)
+                           final int finalScore = score;
+                            try {
+                                // כאן שמתי ברירת מחדל 'score'. אם למשתנה הניקוד שלך בקלאס קוראים אחרת (למשל points), שנה אותו כאן
+
+                            } catch (Exception e) {}
+
+                            new android.app.AlertDialog.Builder(getContext())
+                                    .setTitle("Game Over! המשחק נגמר")
+                                    .setMessage("הכנס את שמך לטבלת השיאים:")
+                                    .setView(input)
+                                    .setCancelable(false) // השחקן חייב ללחוץ אישור
+                                    .setPositiveButton("שמור", new android.content.DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(android.content.DialogInterface dialog, int which) {
+                                            String name = input.getText().toString().trim();
+                                            if (name.isEmpty()) name = "Player";
+
+                                            // 1. שמירה למסד הנתונים
+                                            final int scoreToSend = finalScore ;
+                                            dbHelper.saveScore(name, scoreToSend);
+
+                                            // 2. שליפת 10 השיאים הכי טובים
+                                            java.util.List<String> topScores = dbHelper.getTop10Scores();
+                                            StringBuilder leaderboard = new StringBuilder();
+                                            for (String record : topScores) {
+                                                leaderboard.append(record).append("\n");
+                                            }
+
+                                            // 3. הקפצת מסך טבלת השיאים
+                                            new android.app.AlertDialog.Builder(getContext())
+                                                    .setTitle("🏆 טבלת 10 הגדולים 🏆")
+                                                    .setMessage(leaderboard.toString())
+                                                    .setPositiveButton("סגור", null)
+                                                    .show();
+                                        }
+                                    }).show();
+                        }
+                    });
+                }
+
             }
             else resetBall();
         }

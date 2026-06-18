@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private GameView gameView ;
+    private DatabaseHelper dbHelper ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         gameView = new GameView(this, metrics.widthPixels,metrics.heightPixels);
         setContentView(gameView);
+        dbHelper = new DatabaseHelper(this);
     }
 
     @Override
